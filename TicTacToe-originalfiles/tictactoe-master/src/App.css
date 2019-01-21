@@ -1,0 +1,28 @@
+.App {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 40px;
+  font-family: "american typewriter";
+  text-shadow: -1px -1px grey;
+  font-weight: strong;
+
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.Board {
+  display: flex;
+  justify-content: center;
+}
+
+.grid-item {
+
+  min-width: 100px;
+  min-height: 100px;
+  border: 1.5px solid rgba(0, 0, 0, .8);
+
+
+}
