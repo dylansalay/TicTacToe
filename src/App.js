@@ -5,16 +5,11 @@ import Board from './board.js'
 class App extends Component {
   render() {
     return (
-<div>
-<header className='Header'>Tic Tac Toe</header>
-  <div className="App">
-
-    <Board/>
-  </div>
-</div>
-
-
-    );
+      <div>
+        <header className='Header'>Tic Tac Toe</header>
+        <div className="App"><Board/></div>
+      </div>
+    )
   }
 }
 

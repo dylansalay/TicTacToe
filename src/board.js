@@ -2,121 +2,111 @@ import React, { Component } from 'react';
 
 class Board extends Component {
 
-
-
-
-// add "player 1" and "player 2" areas on the left and right of the game board, have some kind of indicator that highlights whose turn it is (by selecting their side/section and making it glow or something). this section should also record how many total wins each player has. maybe first to 10 wins the game?
-
 constructor(props){
   super(props)
-  // need to write method to designate between players turns (X,O)
   this.state = {
-    turn: 1,
-    winMessage: "",
-    //whoseTurn: "X",
-    board: [
-      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '
-    ],
+    turn: 0,
+    statusMessage: "",
+    board: Array(9).fill(""),
+    xWinCount: 0,
+    oWinCount: 0
   }
 }
 
-
 playerTurn(e){
-  let {board, turn, winMessage} = this.state
-
-  //Update board with player position
   let id = e.target.id
-
-  if (turn > 10){
+  let {
+    board,
+    turn,
+    statusMessage,
+    xWinCount,
+    oWinCount
+    } = this.state
+  let winningArr = [
+    [0,1,2],
+    [3,4,5],
+    [6,7,8],
+    [0,3,6],
+    [1,4,7],
+    [2,5,8],
+    [0,4,8],
+    [2,4,6]]
+  let winner = winningArr.filter((combo) => {
+    let [a, b, c] = combo
+    if (turn >= 10){
     return
   }
-  if(board[id] === " "){
-    turn++
-    if(turn % 2 === 0){
-      board[id] = 'X'
-      // whoseTurn = "X"
-    } else {
-      board[id] = 'O'
-      // whoseTurn = "O"
+    if(board[id] === ""){
+      turn++
+      if(turn % 2 === 0){
+        board[id] = '●'
+      } else {
+        board[id] = '■'
+      }
     }
-  }
-
-  //Check for winner
-  //Set up winning possibilities
-  let winningArr = [[0,1,2] , [3,4,5] , [6,7,8] , [0,3,6] , [1,4,7] , [2,5,8] , [0,4,8] , [2,4,6]]
-  //Iterate over winning combinations?
-  let winner = winningArr.filter((combo, index, array )=>{
-
-    let [a, b, c] = combo
-    if ( board[a] === 'X' && board[b] === 'X' && board[c] === 'X' ) {
-      winMessage = "X is Winner"
-      turn = turn + 5
+    if ( board[a] === '■' && board[b] === '■' && board[c] === '■' ) {
+      statusMessage = "■ is Winner"
+      turn = 10
+      xWinCount++
       return combo
-    } else if ( board[a] === 'O' && board[b] === 'O' && board[c] === 'O' ) {
-      winMessage = "O is Winner"
-      turn = turn + 5
+    } else if ( board[a] === '●' && board[b] === '●' && board[c] === '●' ) {
+      statusMessage = "● is Winner"
+      turn = 10
+      oWinCount++
       return combo
-      // make the below line call a function, that contains .map and is defined earlier in code
-    } else if ( board[1] !== " " && board[2] !== " " && board[3] !== " " && board[4] !== " " && board[5] !== " " && board[6] !== " " && board[7] !== " " && board[8] !== " " && board[9] !== " " ) {
-      winMessage = "Stalemate!"
+    } else if ( turn === 9 ) {
+      statusMessage = "Stalemate"
+
     }
   })
-
-  this.setState({turn: turn, board: board, winMessage: winMessage})
+  this.setState({
+    turn: turn,
+    board: board,
+    statusMessage: statusMessage,
+    xWinCount: xWinCount,
+    oWinCount: oWinCount
+  })
 }
 
 restart(){
   this.setState ({
-    turn: 1,
-    winMessage: ' ',
-    board: [
-      ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '
-    ],
+    turn: 0,
+    statusMessage: "",
+    board: Array(9).fill("")
   })
 }
 
 render() {
-  let {winMessage} = this.state
+  let {
+    statusMessage,
+    xWinCount,
+    oWinCount,
+    turn
+    } = this.state
   let squares = this.state.board.map((val, index) => {
-
+      function hideButton() {
+        if (turn < 9) {
+        var button = document.getElementById("button")
+        button.style.display = 'none';
+        }
+      }
     return  (
       <div onClick={this.playerTurn.bind(this)} key={index} id={index} className="grid-item">{val}</div>
-
     )
   })
   return (
-<div>
-    <div className="Board">
-      <div className="grid-container">
-        {squares}
-      </div>
+      <div>
+        <div className="Board">
+          <div className="grid-container">{squares}</div>
+        </div>
+        <button id="button" onClick={this.restart.bind(this)}>Restart</button>
+        <div className="winmsg">
+          <div>X wins: {xWinCount}</div>
+          <div>O wins:{oWinCount}</div>
+          <div>{statusMessage}</div>
+        </div>
     </div>
-    <button onClick={this.restart.bind(this)}>Restart</button>
-    <div>{winMessage}</div>
-</div>
-  );
+  );}
 }
-
-
-
-
-
-//create 3x3 grid container with grid items
-
-// <div class="grid-container">
-//   <div onClick={this.playerTurn.bind(this)} id = '0' class="grid-item">{this.state.square[0]}</div>
-//   <div onClick={this.playerTurn.bind(this)} id = '1' class="grid- item">{this.state.square[1]}</div>
-//   <div onClick={this.playerTurn.bind(this)} id = '2' class="grid-item">{this.state.square[2]}</div>
-//   <div onClick={this.playerTurn.bind(this)} id = '3' class="grid-item">{this.state.square[3]}</div>
-//   <div onClick={this.playerTurn.bind(this)} id = '4' class="grid-item">{this.state.square[4]}</div>
-//   <div onClick={this.playerTurn.bind(this)} id = '5' class="grid-item">{this.state.square[5]}</div>
-//   <div onClick={this.playerTurn.bind(this)} id = '6' class="grid-item">{this.state.square[6]}</div>
-//   <div onClick={this.playerTurn.bind(this)} id = '7' class="grid-item">{this.state.square[7]}</div>
-//   <div onClick={this.playerTurn.bind(this)} id = '8' class="grid-item">{this.state.square[8]}</div>
-// </div>
-// )}
-}
-
-
 
 export default Board;
