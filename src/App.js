@@ -6,8 +6,10 @@ class App extends Component {
   render() {
     return (
       <div>
-        <header className='Header'>Tic Tac Toe</header>
-        <div className="App"><Board/></div>
+        <h1 id='header'>Tic-Tac-Toe</h1>
+        <div id='board_container'>
+          <Board/>
+        </div>
       </div>
     )
   }

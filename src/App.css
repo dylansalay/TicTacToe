@@ -1,63 +1,92 @@
-.Header {
+body {
+  background-image: url("background.jpg");
+  font-family: 'Cabin Sketch', cursive;
+}
+
+#header {
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 30px;
-
-  /* text-decoration: underline; */
-font-family: 'Ceviche One', cursive;
-  text-shadow: -1px -1px grey;
-  font-weight: bold;
-  font-size: 85px;
-  margin-bottom: -5px;
+  margin-top: 42px;
+  margin-bottom: 16px;
+  font-size: 64pt;
+  user-select: none;
 }
 
-
-.App {
-  text-align: center;
-  font-size: 40px;
-
+@media screen and (max-width: 600px) {
+  #header {
+    font-size: 48pt;
+  }
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: auto auto auto;
-
-
-
-}
-
-.Board {
+#board_container {
   display: flex;
   justify-content: center;
+  align-items: center;
+
 }
 
-.grid-item {
 
-  min-width: 120px;
-  min-height: 120px;
-  border: 1px solid black;
+.grid_container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+#board_div {
+  display: flex;
+  justify-content: center;
+  background-image: url("board.png");
+  width: 408px;
+
+}
+
+.grid_item {
+  min-width: 136px;
+  min-height: 136px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #F7F3E3;
-  color: #005287;
-  font-family: Helvetica, cursive;
-  font-size: 72pt;
+  background-color: transparent;
+  color: black;
+  font-size: 56pt;
+  user-select: none;
+}
+
+#restart {
+  padding: 10px;
+  border-radius: 6px;
+  background-color: black;
+  color: white;
+  font-size: 24px;
+  outline: 0;
+  font-family: 'Cabin Sketch', cursive;
 
 }
 
-.Button {
-font-family: 'Ceviche One', cursive;
-  font-weight: bold;
-  margin: -5px;
-  padding: 8px;
-  border-width: 0px;
-  border-radius: 100px;
-  background-color: #F7F3E3;
-  font-size: 20px;
+#button_container {
+  text-align: center;
 }
 
-.winmsg {
-  font-family: Arial, cursive;
+#score_container {
+  font-size: 38px;
+  width: 408px;
+}
+
+
+#x_score, #o_score {
+  display: inline;
+  margin: 6px 20px;
+
+}
+
+#x_score {
+  float: left;
+}
+
+#o_score {
+  float: right;
+}
+
+#status {
   margin: auto 20px auto 20px;
+  text-align: center;
+  font-size: 30px;
 }

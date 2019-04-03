@@ -1,112 +1,112 @@
 import React, { Component } from 'react';
 
 class Board extends Component {
-
-constructor(props){
-  super(props)
-  this.state = {
-    turn: 0,
-    statusMessage: "",
-    board: Array(9).fill(""),
-    xWinCount: 0,
-    oWinCount: 0
-  }
-}
-
-playerTurn(e){
-  let id = e.target.id
-  let {
-    board,
-    turn,
-    statusMessage,
-    xWinCount,
-    oWinCount
-    } = this.state
-  let winningArr = [
-    [0,1,2],
-    [3,4,5],
-    [6,7,8],
-    [0,3,6],
-    [1,4,7],
-    [2,5,8],
-    [0,4,8],
-    [2,4,6]]
-  let winner = winningArr.filter((combo) => {
-    let [a, b, c] = combo
-    if (turn >= 10){
-    return
-  }
-    if(board[id] === ""){
-      turn++
-      if(turn % 2 === 0){
-        board[id] = '●'
-      } else {
-        board[id] = '■'
+  constructor(props){
+    super(props)
+      this.state = {
+        board: Array(9).fill(""),
+        turn: 0,
+        xWinCount: 0,
+        oWinCount: 0,
+        statusMessage: ""
       }
     }
-    if ( board[a] === '■' && board[b] === '■' && board[c] === '■' ) {
-      statusMessage = "■ is Winner"
-      turn = 10
-      xWinCount++
-      return combo
-    } else if ( board[a] === '●' && board[b] === '●' && board[c] === '●' ) {
-      statusMessage = "● is Winner"
-      turn = 10
-      oWinCount++
-      return combo
-    } else if ( turn === 9 ) {
-      statusMessage = "Stalemate"
 
+  playerTurn(e){
+    let id = e.target.id
+    let {
+      board,
+      turn,
+      xWinCount,
+      oWinCount,
+      statusMessage
+      } = this.state
+    let winningArr = [
+      [0,1,2],
+      [3,4,5],
+      [6,7,8],
+      [0,3,6],
+      [1,4,7],
+      [2,5,8],
+      [0,4,8],
+      [2,4,6]]
+    let winner = winningArr.filter((combo) => {
+      let [a, b, c] = combo
+      if (turn >= 10){
+      return
     }
-  })
-  this.setState({
-    turn: turn,
-    board: board,
-    statusMessage: statusMessage,
-    xWinCount: xWinCount,
-    oWinCount: oWinCount
-  })
-}
-
-restart(){
-  this.setState ({
-    turn: 0,
-    statusMessage: "",
-    board: Array(9).fill("")
-  })
-}
-
-render() {
-  let {
-    statusMessage,
-    xWinCount,
-    oWinCount,
-    turn
-    } = this.state
-  let squares = this.state.board.map((val, index) => {
-      function hideButton() {
-        if (turn < 9) {
-        var button = document.getElementById("button")
-        button.style.display = 'none';
+      if(board[id] === ""){
+        turn++
+        if(turn % 2 === 0){
+          board[id] = 'o'
+        } else {
+          board[id] = 'x'
         }
       }
-    return  (
-      <div onClick={this.playerTurn.bind(this)} key={index} id={index} className="grid-item">{val}</div>
-    )
-  })
-  return (
+      if ( board[a] === 'x' && board[b] === 'x' && board[c] === 'x' ) {
+        statusMessage = "X wins!"
+        turn = 10
+        xWinCount++
+        return combo
+      } else if ( board[a] === 'o' && board[b] === 'o' && board[c] === 'o' ) {
+        statusMessage = "O Wins!"
+        turn = 10
+        oWinCount++
+        return combo
+      } else if ( turn === 9 ) {
+        statusMessage = "Stalemate!"
+      }
+    })
+    this.setState({
+      board: board,
+      turn: turn,
+      xWinCount: xWinCount,
+      oWinCount: oWinCount,
+      statusMessage: statusMessage
+    })
+  }
+
+  restart(){
+    this.setState ({
+      board: Array(9).fill(""),
+      turn: 0,
+      statusMessage: ""
+    })
+  }
+
+  render() {
+    let {
+      board,
+      turn,
+      xWinCount,
+      oWinCount,
+      statusMessage
+      } = this.state
+    let squares = this.state.board.map((val, index) => {
+        // if (turn < 9) {
+        //   var button = document.getElementById("button")
+        //     button.style.display = 'none;';
+        // }
+      return  (
+        <div onClick={this.playerTurn.bind(this)} key={index} id={index} className="grid_item">{val}</div>
+      )
+    })
+    return (
       <div>
-        <div className="Board">
-          <div className="grid-container">{squares}</div>
+        <div id="board_div">
+          <div className="grid_container">{squares}</div>
         </div>
-        <button id="button" onClick={this.restart.bind(this)}>Restart</button>
-        <div className="winmsg">
-          <div>X wins: {xWinCount}</div>
-          <div>O wins:{oWinCount}</div>
-          <div>{statusMessage}</div>
+        <div id="score_container">
+          <p id="x_score">X wins: {xWinCount}</p>
+          <p id="o_score">O wins: {oWinCount}</p>
         </div>
-    </div>
-  );}
+        <div id="button_container">
+          <button id="restart" onClick={this.restart.bind(this)}>Restart</button>
+        </div>
+        <div id="status">{statusMessage}</div>
+      </div>
+    );
+  }
 }
 
 export default Board;
