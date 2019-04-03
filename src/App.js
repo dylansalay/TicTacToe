@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div>
         <h1 id='header'>Tic-Tac-Toe</h1>
-        <div id='board_container'>
+        <div id='board'>
           <Board/>
         </div>
       </div>

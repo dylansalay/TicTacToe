@@ -12,6 +12,8 @@ class Board extends Component {
       }
     }
 
+
+
   playerTurn(e){
     let id = e.target.id
     let {
@@ -35,36 +37,36 @@ class Board extends Component {
       if (turn >= 10){
       return
     }
-      if(board[id] === ""){
-        turn++
-        if(turn % 2 === 0){
-          board[id] = 'o'
-        } else {
-          board[id] = 'x'
-        }
+    if(board[id] === ""){
+      turn++
+      if(turn % 2 === 0){
+        board[id] = 'o'
+      } else {
+        board[id] = 'x'
       }
-      if ( board[a] === 'x' && board[b] === 'x' && board[c] === 'x' ) {
-        statusMessage = "X wins!"
-        turn = 10
-        xWinCount++
-        return combo
-      } else if ( board[a] === 'o' && board[b] === 'o' && board[c] === 'o' ) {
-        statusMessage = "O Wins!"
-        turn = 10
-        oWinCount++
-        return combo
-      } else if ( turn === 9 ) {
-        statusMessage = "Draw!"
-      }
-    })
-    this.setState({
-      board: board,
-      turn: turn,
-      xWinCount: xWinCount,
-      oWinCount: oWinCount,
-      statusMessage: statusMessage
-    })
-  }
+    }
+    if ( board[a] === 'x' && board[b] === 'x' && board[c] === 'x' ) {
+      statusMessage = "X wins!"
+      turn = 10
+      xWinCount++
+      return combo
+    } else if ( board[a] === 'o' && board[b] === 'o' && board[c] === 'o' ) {
+      statusMessage = "O Wins!"
+      turn = 10
+      oWinCount++
+      return combo
+    } else if ( turn === 9 ) {
+      statusMessage = "Draw!"
+    }
+  })
+  this.setState({
+    board: board,
+    turn: turn,
+    xWinCount: xWinCount,
+    oWinCount: oWinCount,
+    statusMessage: statusMessage
+  })
+}
 
   restart(){
     this.setState ({
@@ -92,12 +94,12 @@ class Board extends Component {
       )
     })
     return (
-      <div id="all">
+      <div id="contents_container">
         <div id="main_container">
           <div id="score_container">
-            <p id="x_name">Player X:<br></br><span id="o_score">{xWinCount}</span></p>
+            <p id="x_name">Player X:<br></br><span id="x_score">{xWinCount}</span></p>
           </div>
-          <div id="board_div">
+          <div id="board_container">
             <div className="grid_container">{squares}</div>
           </div>
           <div id="score_container">

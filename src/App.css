@@ -3,34 +3,31 @@ body {
   font-family: 'Cabin Sketch', cursive;
 }
 
-#header {
-  text-align: center;
-  margin-top: 48px;
-  margin-bottom: 16px;
-  font-size: 64pt;
-  user-select: none;
+#contents_container {
+  width: 900px;
 }
 
-#all {
-  width: 1000px;
-  /* border: 1px solid pink; */
-}
-
-@media screen and (max-width: 600px) {
-  #header {
-    font-size: 54pt;
-  }
-}
-
-#board_container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-}
 #main_container {
   display: flex;
   align-items: center;
+}
+
+#board {
+  display: flex;
+  justify-content: center;
+}
+
+#header {
+  text-align: center;
+  font-size: 64pt;
+  margin-top: 48px;
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+#board_container {
+  background-image: url("board.png");
+  width: 408px;
 }
 
 .grid_container {
@@ -38,39 +35,15 @@ body {
   grid-template-columns: auto auto auto;
 }
 
-#board_div {
-  display: flex;
-  justify-content: center;
-  background-image: url("board.png");
-  width: 408px;
-  margin: 0;
-}
-
 .grid_item {
-  min-width: 136px;
-  min-height: 136px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 136px;
+  height: 136px;
+  font-size: 64pt;
   background-color: transparent;
-  color: black;
-  font-size: 56pt;
   user-select: none;
-}
-
-#restart {
-  padding: 6px 20px;
-  border-radius: 50px;
-  /* background-color: black;
-  color: white; */
-  font-size: 32px;
-  outline: 0;
-  font-family: 'Cabin Sketch', cursive;
-  margin-top: 24px;
-}
-
-#button_container {
-  text-align: center;
 }
 
 #score_container {
@@ -78,10 +51,9 @@ body {
   width: 408px;
 }
 
-
 #x_name, #o_name {
-  margin-top: -32px;
   text-align: center;
+  margin-top: -32px;
 }
 
 #x_score, #o_score {
@@ -96,8 +68,29 @@ body {
   float: right;
 }
 
-#status {
-  margin: auto 20px auto 20px;
+#button_container {
   text-align: center;
-  font-size: 30px;
+}
+
+#restart {
+  font-family: 'Cabin Sketch', cursive;
+  font-size: 24px;
+  background-color: #292a2c;
+  color: #e5d7cc;
+  border-radius: 12px;
+  padding: 6px 16px;
+  margin-top: 12px;
+  outline: 0;
+}
+
+#status {
+  font-size: 56px;
+  text-align: center;
+  margin-top: 12px;
+}
+
+@media screen and (max-width: 600px) {
+  #header {
+    font-size: 54pt;
+  }
 }
