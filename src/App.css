@@ -5,15 +5,20 @@ body {
 
 #header {
   text-align: center;
-  margin-top: 42px;
+  margin-top: 48px;
   margin-bottom: 16px;
   font-size: 64pt;
   user-select: none;
 }
 
+#all {
+  width: 1000px;
+  /* border: 1px solid pink; */
+}
+
 @media screen and (max-width: 600px) {
   #header {
-    font-size: 48pt;
+    font-size: 54pt;
   }
 }
 
@@ -23,7 +28,10 @@ body {
   align-items: center;
 
 }
-
+#main_container {
+  display: flex;
+  align-items: center;
+}
 
 .grid_container {
   display: grid;
@@ -35,7 +43,7 @@ body {
   justify-content: center;
   background-image: url("board.png");
   width: 408px;
-
+  margin: 0;
 }
 
 .grid_item {
@@ -51,14 +59,14 @@ body {
 }
 
 #restart {
-  padding: 10px;
-  border-radius: 6px;
-  background-color: black;
-  color: white;
-  font-size: 24px;
+  padding: 6px 20px;
+  border-radius: 50px;
+  /* background-color: black;
+  color: white; */
+  font-size: 32px;
   outline: 0;
   font-family: 'Cabin Sketch', cursive;
-
+  margin-top: 24px;
 }
 
 #button_container {
@@ -66,22 +74,25 @@ body {
 }
 
 #score_container {
-  font-size: 38px;
+  font-size: 32pt;
   width: 408px;
 }
 
 
-#x_score, #o_score {
-  display: inline;
-  margin: 6px 20px;
-
+#x_name, #o_name {
+  margin-top: -32px;
+  text-align: center;
 }
 
-#x_score {
+#x_score, #o_score {
+  font-size: 72pt;
+}
+
+#x_name {
   float: left;
 }
 
-#o_score {
+#o_name {
   float: right;
 }
 

@@ -54,7 +54,7 @@ class Board extends Component {
         oWinCount++
         return combo
       } else if ( turn === 9 ) {
-        statusMessage = "Stalemate!"
+        statusMessage = "Draw!"
       }
     })
     this.setState({
@@ -92,16 +92,20 @@ class Board extends Component {
       )
     })
     return (
-      <div>
-        <div id="board_div">
-          <div className="grid_container">{squares}</div>
-        </div>
-        <div id="score_container">
-          <p id="x_score">X wins: {xWinCount}</p>
-          <p id="o_score">O wins: {oWinCount}</p>
+      <div id="all">
+        <div id="main_container">
+          <div id="score_container">
+            <p id="x_name">Player X:<br></br><span id="o_score">{xWinCount}</span></p>
+          </div>
+          <div id="board_div">
+            <div className="grid_container">{squares}</div>
+          </div>
+          <div id="score_container">
+            <p id="o_name">Player O:<br></br><span id="o_score">{oWinCount}</span></p>
+          </div>
         </div>
         <div id="button_container">
-          <button id="restart" onClick={this.restart.bind(this)}>Restart</button>
+        <button id="restart" onClick={this.restart.bind(this)}>Restart</button>
         </div>
         <div id="status">{statusMessage}</div>
       </div>
