@@ -14,7 +14,9 @@ class Board extends Component {
 
   // This function contains most of the game's logic
   playerTurn(e){
+
     let id = e.target.id // Recognize which game tile is clicked for event
+
     let { // Deconstruction of this.state objects to be manipulated in playerTurn() function
       board,
       turn,
@@ -22,6 +24,7 @@ class Board extends Component {
       oWinCount,
       statusMessage
       } = this.state
+
     let winningArr = [ // Define which array index combinations would constitute a "win"
       [0,1,2],
       [3,4,5],
@@ -31,11 +34,13 @@ class Board extends Component {
       [2,5,8],
       [0,4,8],
       [2,4,6]]
+
     let winner = winningArr.filter((combo) => { // Look for winning array combinations on game board
       let [a, b, c] = combo // Create variable
       if (turn >= 10){ // Detect if the game board has been filled without a win occurring, and stop the game if so
         return
       }
+
       // Determine which player's move it is, and render the game tile accordingly
       if(board[id] === ""){ // Only allow this to occur with unclicked tiles (prevents multiple events on the same tile)
         turn++ // Advance the game's turn counter
@@ -45,24 +50,28 @@ class Board extends Component {
           board[id] = 'x' // Place an 'X' on corresponding game tile
         }
       }
+
       // Detect if a winning array combo has been satisfied by Player X
       if ( board[a] === 'x' && board[b] === 'x' && board[c] === 'x' ) {
         statusMessage = "X wins!" // Render message declaring Player X as winner
         turn = 10 // Prevent additional turns
         xWinCount++ // Add a win to Player X's counter
         return combo // Stop game
+
       // Do the same for Player O
       } else if ( board[a] === 'o' && board[b] === 'o' && board[c] === 'o' ) {
         statusMessage = "O Wins!"
         turn = 10
         oWinCount++
         return combo
+
       // Declare a stalemate
       } else if ( turn === 9 ) {
         statusMessage = "Draw!"
         return
       }
     })
+
     // Update current state
     this.setState({
       board: board,
@@ -99,20 +108,22 @@ class Board extends Component {
     return (
       <div id="contents_container">
         <div id="main_container">
-          <div id="score_container">
+          <div id="x_score_container">
             <p id="x_name">Player X:<br></br><span id="x_score">{xWinCount}</span></p>
           </div>
           <div id="board_container">
             <div className="grid_container">{squares}</div>
           </div>
-          <div id="score_container">
+          <div id="o_score_container">
             <p id="o_name">Player O:<br></br><span id="o_score">{oWinCount}</span></p>
           </div>
         </div>
-        <div id="button_container">
-          <button id="restart" onClick={this.restart.bind(this)}>Restart</button>
+        <div id="bottom_container">
+          <div id="button_container">
+            <button id="restart" onClick={this.restart.bind(this)}>Restart</button>
+          </div>
+          <div id="status">{statusMessage}</div>
         </div>
-        <div id="status">{statusMessage}</div>
       </div>
     );
   }

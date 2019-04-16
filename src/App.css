@@ -7,6 +7,11 @@ body {
   width: 900px;
 }
 
+.red {
+  background: red;
+  color: red;
+}
+
 #main_container {
   display: flex;
   align-items: center;
@@ -28,6 +33,7 @@ body {
 #board_container {
   background-image: url("board.png");
   width: 408px;
+  order: 2;
 }
 
 .grid_container {
@@ -46,9 +52,20 @@ body {
   user-select: none;
 }
 
-#score_container {
+#x_score_container {
   font-size: 32pt;
   width: 408px;
+  order: 1;
+}
+
+#o_score_container {
+  font-size: 32pt;
+  width: 408px;
+  order: 3;
+}
+
+#bottom_container {
+  order: 4;
 }
 
 #x_name, #o_name {
@@ -89,8 +106,37 @@ body {
   margin-top: 12px;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   #header {
     font-size: 54pt;
+  }
+
+  #contents_container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+  }
+
+  #board_container {
+    order: 1;
+  }
+
+  #bottom_container {
+    order: 2;
+  }
+
+  #x_score_container, #o_score_container {
+    order: 3;
+  }
+  #x_name {
+    float: none;
+  }
+
+  #o_name {
+    float: none;
+  }
+
+  #x_score_container, #o_score_container, #bottom_container, #board_container {
+    display: inline-block;
   }
 }
